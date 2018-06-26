@@ -4,6 +4,7 @@ import Vuex from 'vuex'
 Vue.use(Vuex);
 // export to import using later
 export const store = new Vuex.Store({
+    strict: true, // limit access data store from outside, so we must use mutation
     state: {
         products: [
             { name: 'Banana skin', price: 20},
@@ -21,6 +22,13 @@ export const store = new Vuex.Store({
                 }
             })
             return saleProducts;
+        }
+    },
+    mutations: {
+        reducePrice: state => {
+            state.products.forEach(product => {
+                product.price -= 1;
+            })
         }
     }
 })
